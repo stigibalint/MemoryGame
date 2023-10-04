@@ -4,10 +4,31 @@ let moves = document.getElementById("moves");
 let time = document.getElementById("time");
 back = [...back, ...back]
 
+let date = new Date()
+
+let intervalID = setInterval(()=>{
+   let sec = Math.floor(((date -  new Date() ) * -1) / 1000)
+
+   let min  = Math.floor(sec / 60);
+   sec = sec % 60 ;
+   time.innerText = (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+},1000)
+
 back = back.sort( () => Math.random() - 0.5 )
 let makeSpan = (i) =>{
     return  `<span>${back[i]}</span>`;
 }
+
+
+let testWin = () => {
+    if(cards.length === document.getElementsByClassName("good").length){
+        //WIN
+        alert("You Win! ");
+        clearInterval(intervalID);
+    }
+
+}
+
 
 let testPair = () =>{
     let selected = document.getElementsByClassName("selected")
@@ -43,5 +64,6 @@ for(let i = 0; i < cards.length; i++){
         cards[i].innerHTML = makeSpan(i);
         cards[i].classList.add("selected");
         testPair();
+        testWin();
     })
 }
