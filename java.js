@@ -25,6 +25,7 @@ let testWin = () => {
         //WIN
         alert("You Win! ");
         clearInterval(intervalID);
+        
     }
 
 }
@@ -64,6 +65,13 @@ for(let i = 0; i < cards.length; i++){
         cards[i].innerHTML = makeSpan(i);
         cards[i].classList.add("selected");
         testPair();
-        testWin();
+        setTimeout(() => {
+            testWin();
+        }, 500);
+    
     })
+
+}
+function reset(){
+    window.location.reload();
 }
